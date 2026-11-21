@@ -73,6 +73,35 @@ Describe 'Temizlik-Gerekli (esik karari)' {
     }
 }
 
+Describe 'Dinamik esik ve onbellek tahmini' {
+    It 'CPU <cpu> iken <esik> MB esigini kullanir' -TestCases @(
+        @{ cpu = 80; esik = 5600 }
+        @{ cpu = 81; esik = 7200 }
+    ) {
+        $cfg = Ayar-Yukle
+        $cfg.DinamikEsikAktif = $true
+        Esik-Hesapla $cfg @{ ToplamMB = 16000; CpuYuzde = $cpu } | Should -Be $esik
+    }
+
+    It 'iki pozitif artisla tahmin yapar ve bekleme suresine uyar' {
+        $cfg = Ayar-Yukle
+        $cfg.EsikMB = 1000
+        $cfg.OngoruluTemizlik = $true
+        $olcum = @{ OnbellekMB = 850 }
+        Temizlik-Nedeni $cfg $olcum 0.25 0.50 30 | Should -Match '10 dk'
+        Temizlik-Nedeni $cfg $olcum 0.25 0.50 29 | Should -BeNullOrEmpty
+        Temizlik-Nedeni $cfg $olcum -0.25 0.50 30 | Should -BeNullOrEmpty
+    }
+
+    It 'gercek ornek araligini kullanir ve uzun kesintide hizi sifirlar' {
+        $zaman = [datetime]::UtcNow
+        $once = @{ Zaman = $zaman; OnbellekMB = 1000 }
+        $sonra = @{ Zaman = $zaman.AddSeconds(45); OnbellekMB = 1090 }
+        Bellek-Hizi $once $sonra 120 | Should -Be 2
+        Bellek-Hizi $once $sonra 30 | Should -BeNullOrEmpty
+    }
+}
+
 # ---------------------------------------------------------------------------
 Describe 'Ayar-Yukle' {
     It 'config yoksa varsayilanlarla olusturur' {
@@ -124,7 +153,7 @@ Describe 'Ayar-Kaydet' {
 
     It 'geride gecici (.tmp) dosya birakmaz' {
         Ayar-Kaydet (Ayar-Yukle)
-        Test-Path (Join-Path $script:TestKlasoru 'config.json.tmp') | Should -BeFalse
+        @(Get-ChildItem -LiteralPath $script:TestKlasoru -Filter 'config.json.*.tmp').Count | Should -Be 0
     }
 }
 
@@ -201,12 +230,17 @@ Describe 'Bellek olcumu' {
 # ---------------------------------------------------------------------------
 Describe 'Temizle' {
     BeforeEach {
-        # Sahte RAMMap sureci: WaitForExit sonucu ve Kill cagrisi izlenebilir
+        # Sahte RAMMap ve taskkill surecleri: zaman asimi ve kapanma bagimsiz denetlenir.
         $script:beklemeSonucu = $true
-        $script:oldurulen     = $false
-        $script:sahteSurec    = [pscustomobject]@{ ExitCode = 0 }
-        Add-Member -InputObject $script:sahteSurec -MemberType ScriptMethod -Name WaitForExit -Value { param($ms) return $script:beklemeSonucu }
-        Add-Member -InputObject $script:sahteSurec -MemberType ScriptMethod -Name Kill        -Value { $script:oldurulen = $true }
+        $script:sonBekleme    = $true
+        $script:sahteSurec    = [pscustomobject]@{ ExitCode = 0; Id = 54321; HasExited = $false }
+        Add-Member -InputObject $script:sahteSurec -MemberType ScriptMethod -Name WaitForExit -Value {
+            param($ms)
+            if ($ms -eq 60000) { return $script:beklemeSonucu }
+            return $script:sonBekleme
+        }
+        $script:taskkillSureci = [pscustomobject]@{ ExitCode = 0 }
+        Add-Member -InputObject $script:taskkillSureci -MemberType ScriptMethod -Name WaitForExit -Value { return $true }
 
         # Ilk olcum 6000 MB (5000 standby + 1000 modified), sonrakiler 400 MB
         $script:cimSayac = 0
@@ -215,6 +249,7 @@ Describe 'Temizle' {
             if ($script:cimSayac -eq 1) { Yeni-Bellek 5000 1000 } else { Yeni-Bellek 400 }
         }
         Mock Start-Process { return $script:sahteSurec }
+        Mock Start-Process { return $script:taskkillSureci } -ParameterFilter { $FilePath -like '*\taskkill.exe' }
         Mock Set-ItemProperty {}
         Mock New-Item {} -ParameterFilter { $Path -like 'HKCU:*' }
         Mock Test-Path { $true } -ParameterFilter { $Path -like 'HKCU:*' }
@@ -236,6 +271,40 @@ Describe 'Temizle' {
         $cfg.Parametreler = '-Et'
         Temizle $cfg | Out-Null
         Should -Invoke Start-Process -Times 1 -Exactly
+    }
+
+    It 'korunan uygulama acikken otomatik ve elle temizligi erteler' {
+        Mock Get-Process { [pscustomobject]@{ ProcessName = 'OyUn' } }
+        $cfg = Ayar-Yukle
+        $cfg.ExclusionList = @('oyun.EXE')
+        { Temizle $cfg -Otomatik } | Should -Throw '*Temizlik ertelendi*'
+        { Temizle $cfg } | Should -Throw '*Temizlik ertelendi*'
+        Should -Invoke Start-Process -Times 0 -Exactly
+        Should -Invoke Set-ItemProperty -Times 0 -Exactly
+    }
+
+    It 'baska bir temizlik kilidi tutuyorsa yeni surec baslatmaz' {
+        $kilit = [IO.File]::Open((Join-Path $KlasorYolu 'temizlik.lock'), 'OpenOrCreate', 'ReadWrite', 'None')
+        try { { Temizle (Ayar-Yukle) } | Should -Throw '*baska bir temizlik devam ediyor*' }
+        finally { $kilit.Dispose() }
+        Should -Invoke Start-Process -Times 0 -Exactly
+    }
+
+    It 'Dusuk oncelik yalniz otomatik temizlikte -E0 kullanir' {
+        $cfg = Ayar-Yukle
+        $cfg.Priority = 'Dusuk'
+        $cfg.Parametreler = '-Et'
+        Temizle $cfg -Otomatik | Out-Null
+        Temizle $cfg | Out-Null
+        Should -Invoke Start-Process -Times 1 -Exactly -ParameterFilter { $ArgumentList -contains '-E0' }
+        Should -Invoke Start-Process -Times 1 -Exactly -ParameterFilter { $ArgumentList -contains '-Et' }
+    }
+
+    It 'uyarlanabilir mod %75 kullanimin altinda -E0 ve sinirda yapilandirilmis secenegi kullanir' {
+        $cfg = Ayar-Yukle
+        $cfg.Priority = 'Uyarlanabilir'
+        Otomatik-Temizlik-Parametreleri $cfg @('-Et') @{ KullanimYuzde = 74.99 } | Should -Be '-E0'
+        Otomatik-Temizlik-Parametreleri $cfg @('-Et') @{ KullanimYuzde = 75 } | Should -Be '-Et'
     }
 
     It 'gecersiz parametrelerde hicbir yan etki baslatmaz: <deger>' -TestCases @(
@@ -296,17 +365,35 @@ Describe 'Temizle' {
         Get-Content (Join-Path $script:TestKlasoru 'log.txt') -Raw | Should -Match 'Temizlendi\. Onbellek: 6000 MB -> 400 MB'
     }
 
-    It 'RAMMap 60 sn icinde kapanmazsa zorla kapatir' {
+    It 'basarili temizlikte once ve sonra olcumlerini HTML raporuna yazar' {
+        Temizle (Ayar-Yukle) | Out-Null
+        $html = Get-Content -LiteralPath $RaporYolu -Raw
+        $html | Should -Match '5600 MB azalma'
+        $html | Should -Match "value='6000'"
+        $html | Should -Match "value='400'"
+    }
+
+    It 'RAMMap 60 sn icinde kapanmazsa PID ile surec agacini sonlandirir' {
         $script:beklemeSonucu = $false
         $cfg = Ayar-Yukle
-        { Temizle $cfg } | Should -Throw '*60 saniye icinde tamamlanmadi*'
-        $script:oldurulen | Should -BeTrue
+        { Temizle $cfg } | Should -Throw '*surec durdu*'
+        Should -Invoke Start-Process -Times 1 -Exactly -ParameterFilter {
+            $FilePath -like '*\taskkill.exe' -and ($ArgumentList -join ' ') -eq '/PID 54321 /T /F'
+        }
+        Should -Invoke Start-Process -Times 0 -Exactly -ParameterFilter { $ArgumentList -contains '-Et' }
+        Test-Path -LiteralPath $RaporYolu | Should -BeFalse
+    }
+
+    It 'zorla sonlandirma dogrulanamazsa bunu bildirir' {
+        $script:beklemeSonucu = $false
+        $script:sonBekleme = $false
+        { Temizle (Ayar-Yukle) } | Should -Throw '*kapandigi dogrulanamadi*'
     }
 
     It 'RAMMap kapaninca zorla kapatma yapilmaz' {
         $cfg = Ayar-Yukle
         Temizle $cfg | Out-Null
-        $script:oldurulen | Should -BeFalse
+        Should -Invoke Start-Process -Times 0 -Exactly -ParameterFilter { $FilePath -like '*\taskkill.exe' }
     }
 
     It 'RAMMap sifir disi cikis kodunda basarisiz sayilir ve sonraki anahtara gecmez' {
@@ -394,6 +481,30 @@ Describe 'Baslangic-Temizligi' {
         Mock Temizle { throw 'RAMMap hata verdi' }
         (Baslangic-Temizligi ([pscustomobject]@{})) | Should -Be ([datetime]::MinValue)
         Get-Content (Join-Path $script:TestKlasoru 'log.txt') -Raw | Should -Match 'Baslangic temizligi basarisiz'
+    }
+}
+
+Describe 'SQLite telemetrisi' {
+    It 'olcumleri kaydeder ve son yedi gunun HTML raporunu uretebilir' -Skip:(-not (Test-Path "$env:SystemRoot\System32\winsqlite3.dll")) {
+        $zaman = [datetime]::UtcNow
+        Telemetri-Kaydet @{
+            Zaman = $zaman.AddDays(-9)
+            OnbellekMB = 1000.0
+            KullanimYuzde = 12.0
+            CpuYuzde = 30.0
+        } $null
+        Telemetri-Kaydet @{
+            Zaman = $zaman
+            OnbellekMB = 1200.0
+            KullanimYuzde = 56.5
+            CpuYuzde = 42.0
+        } 1.25
+        $olcumler = Sqlite-Calistir 'SELECT onbellek_mb, hiz_mb_sn FROM olcum;'
+        $olcumler.Count | Should -Be 1
+        $olcumler[0][0] | Should -Be '1200'
+        $olcumler[0][1] | Should -Be '1.25'
+        Haftalik-Rapor-Yaz
+        Get-Content -LiteralPath $HaftalikRaporYolu -Raw | Should -Match "value='56.5'"
     }
 }
 

@@ -1,7 +1,9 @@
 Komutlari betigin bulundugu klasorde calistirin:
 
+powershell -ExecutionPolicy Bypass -File .\RAMMapOtomatik.ps1 yardim
 powershell -ExecutionPolicy Bypass -File .\RAMMapOtomatik.ps1 durum
 powershell -ExecutionPolicy Bypass -File .\RAMMapOtomatik.ps1 pano
+powershell -ExecutionPolicy Bypass -File .\RAMMapOtomatik.ps1 rapor
 powershell -ExecutionPolicy Bypass -File .\RAMMapOtomatik.ps1 simdi
 powershell -ExecutionPolicy Bypass -File .\RAMMapOtomatik.ps1 kapat
 powershell -ExecutionPolicy Bypass -File .\RAMMapOtomatik.ps1 ac
@@ -9,6 +11,8 @@ powershell -ExecutionPolicy Bypass -File .\RAMMapOtomatik.ps1 kur
 powershell -ExecutionPolicy Bypass -File .\RAMMapOtomatik.ps1 kaldir
 
 durum: Ayarlari, bellek miktarini ve son log kayitlarini gosterir.
+yardim: Kullanim, komutlar ve tum config.json anahtarlarini gosterir.
+rapor: Toplanan olcumlerden haftalik-rapor.html dosyasini yazar.
 pano: Durumu 2 saniyede bir yeniler. Ctrl+C ile kapanir. Yalnizca izler;
       temizlik baslatmaz, otomasyonun bekleme sayacini degistirmez.
 simdi: Bir kez temizlik yapar.
@@ -27,12 +31,39 @@ config.json ayarlari:
   Windows PowerShell Baslat menusu kaydi ve kullanici bildirim izinleri gerekir.
   Windows bildirimleri engellerse gorunmeyebilir; gonderim hatasi loglanir,
   temizlik sonucu basarili kalir. Ek PowerShell modulu gerekmez.
+- DinamikEsikAktif: Varsayilan false. true iken esik toplam fiziksel RAM'in
+  EsikYuzde kadari (varsayilan %35). CPU %80'i asarsa YuksekCpuEsikArtisi
+  kadar yuzde puan eklenir (varsayilan 10, toplam en fazla %100).
+- OngoruluTemizlik: Varsayilan false. Iki ardisik pozitif onbellek artis
+  hizinin dusuguyle 10 dakikalik tahmin yapar. EsikKontrolu ve bekleme
+  suresi tahminle tetiklenen temizlige de uygulanir.
+- ExclusionList: Varsayilan []. Ornek ["oyun.exe", "blender"]. Listeden
+  herhangi bir surec aciksa otomatik ve elle temizlik ertelenir. RAMMap
+  secenekleri sistem genelinde calisir. Denetim temizlik basinda yapilir.
+- Priority: Otomatik temizlikte Yapilandirilmis (varsayilan, Parametreler),
+  Dusuk (yalnizca -E0) ya da Uyarlanabilir. Uyarlanabilir mod, fiziksel RAM
+  kullanimi %75'in altindayken -E0, %75 ve ustunde Parametreler kullanir.
+  Agirlik %60 RAM kullaniminda 10, %90 kullanimda 90 ve arada dogrusaldir.
+  Agirlik 50'ye ulasinca yapilandirilmis temizlik secilir.
+  simdi komutu dogrudan Parametreler'i kullanir.
+- HtmlRaporAktif: Varsayilan true. Basarili temizlikten sonra report.html
+  yenilenir. Grafikte Standby ve Modified olcumleri once/sonra gosterilir.
+- TelemetriAktif: Varsayilan false. Windows sistem SQLite kutuphanesi
+  (winsqlite3.dll) ile izleme olcumlerini yerel telemetri.sqlite dosyasina
+  kaydeder. Kayitlar onbellek boyutu, fiziksel bellek ve CPU kullanimi,
+  onbellek degisim hizini icerir. Yazim sirasinda 8 gunden eski kayitlar
+  silinir. rapor komutu, son 7 gunde gunluk ortalama ve zirve RAM
+  kullanimini gosterir. HTML dosyalari tarayicida cevrimdisi acilir.
 
 Log: 1 MB esigine ulasacak yazmadan once log.txt, log.txt.1 olarak dondurulur.
 Tek arsiv tutulur; sonraki rotasyon eski arsivin uzerine yazar.
 Mevcut 500 satir siniri da korunur: asildiginda son 300 satir tutulur.
 log.txt.lock dosyasi eszamanli yazma/rotasyon icin kullanilir; bos kalmasi normaldir.
+temizlik.lock dosyasi birden fazla temizligin ayni anda calismasini onler.
+Her RAMMap komutu icin 60 saniye beklenir. Sure doldugunda baslatilan surec
+ve alt surecleri sonlandirilir. Hata halinde siradaki komuta gecilmez.
 
+RAMMapRapor.ps1 betigini RAMMapOtomatik.ps1 ile ayni klasorde tutun.
 Kod guncellemesinin calisan izleme gorevine gecmesi icin kapat, ardindan ac
 komutlarini kullanin. Ayar degisiklikleri izleme dongusunde yeniden okunur.
 Klasoru tasirsaniz eski gorev yollarini yenilemek icin yeni konumda kur gerekir.
@@ -44,8 +75,9 @@ Yonetici yetkisiyle kullanilan betik, RAMMap exe ve config dosyalarina yalnizca
 Test (Pester 5):
 Import-Module Pester -RequiredVersion 5.9.1
 Invoke-Pester .\RAMMapOtomatik.Tests.ps1 -Output Detailed
-Testler RAMMap ve sistem islemlerini taklit eder; canli temizlik veya toast
- gorunurlugunu dogrulamaz. Pester kendi gecici kayit defteri alani icin izin ister.
+Testler RAMMap ve zamanlanmis gorevleri taklit eder. SQLite ve HTML raporlari
+gecici klasorde denetlenir. Canli temizlik ve toast gorunurlugu ayrica
+dogrulanmalidir. Pester varsayilan olarak gecici kayit defteri alani kullanir.
 
 Toast altyapisi kaynagi:
 https://learn.microsoft.com/en-us/windows/win32/shell/enable-desktop-toast-with-appusermodelid

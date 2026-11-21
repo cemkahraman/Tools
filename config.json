@@ -7,5 +7,13 @@
     "BeklemeDakika":  30,
     "RamMapYolu":  "",
     "BildirimAktif":  false,
-    "Parametreler":  "-Em -Et"
+    "Parametreler":  "-Em -Et",
+    "DinamikEsikAktif":  false,
+    "EsikYuzde":  35,
+    "YuksekCpuEsikArtisi":  10,
+    "OngoruluTemizlik":  false,
+    "ExclusionList":  [],
+    "Priority":  "Yapilandirilmis",
+    "HtmlRaporAktif":  true,
+    "TelemetriAktif":  false
 }
