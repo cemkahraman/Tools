@@ -1,0 +1,11 @@
+﻿{
+    "OtomatikCalisma":  true,
+    "AcilistaTemizle":  true,
+    "EsikKontrolu":  true,
+    "EsikMB":  12288,
+    "KontrolSaniye":  60,
+    "BeklemeDakika":  30,
+    "RamMapYolu":  "",
+    "BildirimAktif":  false,
+    "Parametreler":  "-Em -Et"
+}

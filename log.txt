@@ -1,0 +1,327 @@
+﻿2026-11-13 16:29:56  RAMMap cikis kodu: 0
+2026-11-13 16:29:58  Calistiriliyor: C:\Tools\RAMMap.exe -Et
+2026-11-13 16:30:00  RAMMap cikis kodu: 0
+2026-11-13 16:30:04  Temizlendi. Onbellek: 12578 MB -> 424 MB
+2026-11-13 17:00:15  Esik asildi (15865 MB >= 12288 MB), temizleniyor.
+2026-11-13 17:00:15  Calistiriliyor: C:\Tools\RAMMap.exe -Em
+2026-11-13 17:00:15  RAMMap cikis kodu: 0
+2026-11-13 17:00:17  Calistiriliyor: C:\Tools\RAMMap.exe -Et
+2026-11-13 17:00:20  RAMMap cikis kodu: 0
+2026-11-13 17:00:24  Temizlendi. Onbellek: 15863 MB -> 96 MB
+2026-11-13 20:09:39  Calistiriliyor: C:\Tools\RAMMap.exe -Em
+2026-11-13 20:09:40  RAMMap cikis kodu: 0
+2026-11-13 20:09:42  Calistiriliyor: C:\Tools\RAMMap.exe -Et
+2026-11-13 20:09:42  RAMMap cikis kodu: 0
+2026-11-13 20:09:47  Temizlendi. Onbellek: 4149 MB -> 53 MB
+2026-11-13 20:09:47  Izleme basladi. Esik: 12288 MB, kontrol: 60 sn
+2026-11-13 20:39:56  Esik asildi (12338 MB >= 12288 MB), temizleniyor.
+2026-11-13 20:39:57  Calistiriliyor: C:\Tools\RAMMap.exe -Em
+2026-11-13 20:39:57  RAMMap cikis kodu: 0
+2026-11-13 20:39:59  Calistiriliyor: C:\Tools\RAMMap.exe -Et
+2026-11-13 20:40:01  RAMMap cikis kodu: 0
+2026-11-13 20:40:05  Temizlendi. Onbellek: 12335 MB -> 53 MB
+2026-11-13 22:31:42  Esik asildi (18039 MB >= 12288 MB), temizleniyor.
+2026-11-13 22:31:42  Calistiriliyor: C:\Tools\RAMMap.exe -Em
+2026-11-13 22:31:43  RAMMap cikis kodu: 0
+2026-11-13 22:31:45  Calistiriliyor: C:\Tools\RAMMap.exe -Et
+2026-11-13 22:31:47  RAMMap cikis kodu: 0
+2026-11-13 22:31:51  Temizlendi. Onbellek: 18035 MB -> 31 MB
+2026-11-14 00:06:22  Esik asildi (12716 MB >= 12288 MB), temizleniyor.
+2026-11-14 00:06:22  Calistiriliyor: C:\Tools\RAMMap.exe -Em
+2026-11-14 00:06:23  RAMMap cikis kodu: 0
+2026-11-14 00:06:25  Calistiriliyor: C:\Tools\RAMMap.exe -Et
+2026-11-14 00:06:27  RAMMap cikis kodu: 0
+2026-11-14 00:06:32  Temizlendi. Onbellek: 12713 MB -> 43 MB
+2026-11-14 01:36:01  Esik asildi (13759 MB >= 12288 MB), temizleniyor.
+2026-11-14 01:36:01  Calistiriliyor: C:\Tools\RAMMap.exe -Em
+2026-11-14 01:36:02  RAMMap cikis kodu: 0
+2026-11-14 01:36:04  Calistiriliyor: C:\Tools\RAMMap.exe -Et
+2026-11-14 01:36:06  RAMMap cikis kodu: 0
+2026-11-14 01:36:10  Temizlendi. Onbellek: 13754 MB -> 47 MB
+2026-11-14 13:55:23  Calistiriliyor: C:\Tools\RAMMap.exe -Em
+2026-11-14 13:55:24  RAMMap cikis kodu: 0
+2026-11-14 13:55:26  Calistiriliyor: C:\Tools\RAMMap.exe -Et
+2026-11-14 13:55:26  RAMMap cikis kodu: 0
+2026-11-14 13:55:30  Temizlendi. Onbellek: 4195 MB -> 63 MB
+2026-11-14 13:55:30  Izleme basladi. Esik: 12288 MB, kontrol: 60 sn
+2026-11-14 17:29:15  Calistiriliyor: C:\Tools\RAMMap.exe -Em
+2026-11-14 17:29:16  RAMMap cikis kodu: 0
+2026-11-14 17:29:18  Calistiriliyor: C:\Tools\RAMMap.exe -Et
+2026-11-14 17:29:18  RAMMap cikis kodu: 0
+2026-11-14 17:29:23  Temizlendi. Onbellek: 3815 MB -> 27 MB
+2026-11-14 17:29:23  Izleme basladi. Esik: 12288 MB, kontrol: 60 sn
+2026-11-15 15:11:30  Calistiriliyor: C:\Tools\RAMMap.exe -Em
+2026-11-15 15:11:31  RAMMap cikis kodu: 0
+2026-11-15 15:11:33  Calistiriliyor: C:\Tools\RAMMap.exe -Et
+2026-11-15 15:11:33  RAMMap cikis kodu: 0
+2026-11-15 15:11:38  Temizlendi. Onbellek: 3696 MB -> 149 MB
+2026-11-15 15:11:38  Izleme basladi. Esik: 12288 MB, kontrol: 60 sn
+2026-11-15 15:41:47  Esik asildi (13507 MB >= 12288 MB), temizleniyor.
+2026-11-15 15:41:47  Calistiriliyor: C:\Tools\RAMMap.exe -Em
+2026-11-15 15:41:48  RAMMap cikis kodu: 0
+2026-11-15 15:41:50  Calistiriliyor: C:\Tools\RAMMap.exe -Et
+2026-11-15 15:41:52  RAMMap cikis kodu: 0
+2026-11-15 15:41:56  Temizlendi. Onbellek: 13491 MB -> 60 MB
+2026-11-15 16:18:09  Esik asildi (14197 MB >= 12288 MB), temizleniyor.
+2026-11-15 16:18:09  Calistiriliyor: C:\Tools\RAMMap.exe -Em
+2026-11-15 16:18:10  RAMMap cikis kodu: 0
+2026-11-15 16:18:12  Calistiriliyor: C:\Tools\RAMMap.exe -Et
+2026-11-15 16:18:13  RAMMap cikis kodu: 0
+2026-11-15 16:18:18  Temizlendi. Onbellek: 14194 MB -> 16 MB
+2026-11-15 17:20:38  Esik asildi (12439 MB >= 12288 MB), temizleniyor.
+2026-11-15 17:20:38  Calistiriliyor: C:\Tools\RAMMap.exe -Em
+2026-11-15 17:20:39  RAMMap cikis kodu: 0
+2026-11-15 17:20:41  Calistiriliyor: C:\Tools\RAMMap.exe -Et
+2026-11-15 17:20:42  RAMMap cikis kodu: 0
+2026-11-15 17:20:46  Temizlendi. Onbellek: 12438 MB -> 104 MB
+2026-11-15 22:28:58  Calistiriliyor: C:\Tools\RAMMap.exe -Em
+2026-11-15 22:28:59  RAMMap cikis kodu: 0
+2026-11-15 22:29:01  Calistiriliyor: C:\Tools\RAMMap.exe -Et
+2026-11-15 22:29:01  RAMMap cikis kodu: 0
+2026-11-15 22:29:06  Temizlendi. Onbellek: 4029 MB -> 23 MB
+2026-11-15 22:29:06  Izleme basladi. Esik: 12288 MB, kontrol: 60 sn
+2026-11-15 23:40:29  Esik asildi (13688 MB >= 12288 MB), temizleniyor.
+2026-11-15 23:40:29  Calistiriliyor: C:\Tools\RAMMap.exe -Em
+2026-11-15 23:40:30  RAMMap cikis kodu: 0
+2026-11-15 23:40:32  Calistiriliyor: C:\Tools\RAMMap.exe -Et
+2026-11-15 23:40:33  RAMMap cikis kodu: 0
+2026-11-15 23:40:37  Temizlendi. Onbellek: 13676 MB -> 112 MB
+2026-11-16 15:05:29  Calistiriliyor: C:\Tools\RAMMap.exe -Em
+2026-11-16 15:05:30  RAMMap cikis kodu: 0
+2026-11-16 15:05:32  Calistiriliyor: C:\Tools\RAMMap.exe -Et
+2026-11-16 15:05:33  RAMMap cikis kodu: 0
+2026-11-16 15:05:37  Temizlendi. Onbellek: 3117 MB -> 101 MB
+2026-11-16 15:05:37  Izleme basladi. Esik: 12288 MB, kontrol: 60 sn
+2026-11-16 16:14:22  Esik asildi (12303 MB >= 12288 MB), temizleniyor.
+2026-11-16 16:14:22  Calistiriliyor: C:\Tools\RAMMap.exe -Em
+2026-11-16 16:14:23  RAMMap cikis kodu: 0
+2026-11-16 16:14:25  Calistiriliyor: C:\Tools\RAMMap.exe -Et
+2026-11-16 16:14:26  RAMMap cikis kodu: 0
+2026-11-16 16:14:31  Temizlendi. Onbellek: 12302 MB -> 371 MB
+2026-11-16 23:39:00  Calistiriliyor: C:\Tools\RAMMap.exe -Em
+2026-11-16 23:39:01  RAMMap cikis kodu: 0
+2026-11-16 23:39:03  Calistiriliyor: C:\Tools\RAMMap.exe -Et
+2026-11-16 23:39:05  RAMMap cikis kodu: 0
+2026-11-16 23:39:09  Temizlendi. Onbellek: 14380 MB -> 43 MB
+2026-11-16 23:39:09  Izleme basladi. Esik: 12288 MB, kontrol: 60 sn
+2026-11-17 00:15:22  Esik asildi (13023 MB >= 12288 MB), temizleniyor.
+2026-11-17 00:15:22  Calistiriliyor: C:\Tools\RAMMap.exe -Em
+2026-11-17 00:15:23  RAMMap cikis kodu: 0
+2026-11-17 00:15:25  Calistiriliyor: C:\Tools\RAMMap.exe -Et
+2026-11-17 00:15:28  RAMMap cikis kodu: 0
+2026-11-17 00:15:32  Temizlendi. Onbellek: 13022 MB -> 132 MB
+2026-11-17 00:45:43  Esik asildi (12980 MB >= 12288 MB), temizleniyor.
+2026-11-17 00:45:44  Calistiriliyor: C:\Tools\RAMMap.exe -Em
+2026-11-17 00:45:44  RAMMap cikis kodu: 0
+2026-11-17 00:45:46  Calistiriliyor: C:\Tools\RAMMap.exe -Et
+2026-11-17 00:45:49  RAMMap cikis kodu: 0
+2026-11-17 00:45:53  Temizlendi. Onbellek: 12977 MB -> 71 MB
+2026-11-17 15:14:43  Calistiriliyor: C:\Tools\RAMMap.exe -Em
+2026-11-17 15:14:44  RAMMap cikis kodu: 0
+2026-11-17 15:14:46  Calistiriliyor: C:\Tools\RAMMap.exe -Et
+2026-11-17 15:14:46  RAMMap cikis kodu: 0
+2026-11-17 15:14:51  Temizlendi. Onbellek: 3812 MB -> 649 MB
+2026-11-17 15:14:51  Izleme basladi. Esik: 12288 MB, kontrol: 60 sn
+2026-11-17 16:48:43  Esik asildi (12534 MB >= 12288 MB), temizleniyor.
+2026-11-17 16:48:43  Calistiriliyor: C:\Tools\RAMMap.exe -Em
+2026-11-17 16:48:43  RAMMap cikis kodu: 0
+2026-11-17 16:48:45  Calistiriliyor: C:\Tools\RAMMap.exe -Et
+2026-11-17 16:48:47  RAMMap cikis kodu: 0
+2026-11-17 16:48:52  Temizlendi. Onbellek: 12522 MB -> 565 MB
+2026-11-17 16:59:08  Calistiriliyor: C:\Tools\RAMMap.exe -Em
+2026-11-17 16:59:09  RAMMap cikis kodu: 0
+2026-11-17 16:59:11  Calistiriliyor: C:\Tools\RAMMap.exe -Et
+2026-11-17 16:59:12  RAMMap cikis kodu: 0
+2026-11-17 16:59:16  Temizlendi. Onbellek: 2180 MB -> 23 MB
+2026-11-18 00:09:21  Calistiriliyor: C:\Tools\RAMMap.exe -Em
+2026-11-18 00:09:21  RAMMap cikis kodu: 0
+2026-11-18 00:09:23  Calistiriliyor: C:\Tools\RAMMap.exe -Et
+2026-11-18 00:09:24  RAMMap cikis kodu: 0
+2026-11-18 00:09:28  Temizlendi. Onbellek: 3986 MB -> 263 MB
+2026-11-18 00:09:28  Izleme basladi. Esik: 12288 MB, kontrol: 60 sn
+2026-11-18 00:39:38  Esik asildi (15968 MB >= 12288 MB), temizleniyor.
+2026-11-18 00:39:38  Calistiriliyor: C:\Tools\RAMMap.exe -Em
+2026-11-18 00:39:39  RAMMap cikis kodu: 0
+2026-11-18 00:39:41  Calistiriliyor: C:\Tools\RAMMap.exe -Et
+2026-11-18 00:39:43  RAMMap cikis kodu: 0
+2026-11-18 00:39:47  Temizlendi. Onbellek: 15960 MB -> 198 MB
+2026-11-18 01:33:06  Esik asildi (12874 MB >= 12288 MB), temizleniyor.
+2026-11-18 01:33:06  Calistiriliyor: C:\Tools\RAMMap.exe -Em
+2026-11-18 01:33:07  RAMMap cikis kodu: 0
+2026-11-18 01:33:09  Calistiriliyor: C:\Tools\RAMMap.exe -Et
+2026-11-18 01:33:10  RAMMap cikis kodu: 0
+2026-11-18 01:33:15  Temizlendi. Onbellek: 12864 MB -> 231 MB
+2026-11-18 02:03:25  Esik asildi (18833 MB >= 12288 MB), temizleniyor.
+2026-11-18 02:03:25  Calistiriliyor: C:\Tools\RAMMap.exe -Em
+2026-11-18 02:03:26  RAMMap cikis kodu: 0
+2026-11-18 02:03:28  Calistiriliyor: C:\Tools\RAMMap.exe -Et
+2026-11-18 02:03:30  RAMMap cikis kodu: 0
+2026-11-18 02:03:34  Temizlendi. Onbellek: 18765 MB -> 39 MB
+2026-11-18 16:36:29  Calistiriliyor: C:\Tools\RAMMap.exe -Em
+2026-11-18 16:36:30  RAMMap cikis kodu: 0
+2026-11-18 16:36:32  Calistiriliyor: C:\Tools\RAMMap.exe -Et
+2026-11-18 16:36:32  RAMMap cikis kodu: 0
+2026-11-18 16:36:37  Temizlendi. Onbellek: 3990 MB -> 181 MB
+2026-11-18 16:36:37  Izleme basladi. Esik: 12288 MB, kontrol: 60 sn
+2026-11-18 17:06:47  Esik asildi (14509 MB >= 12288 MB), temizleniyor.
+2026-11-18 17:06:47  Calistiriliyor: C:\Tools\RAMMap.exe -Em
+2026-11-18 17:06:48  RAMMap cikis kodu: 0
+2026-11-18 17:06:50  Calistiriliyor: C:\Tools\RAMMap.exe -Et
+2026-11-18 17:06:51  RAMMap cikis kodu: 0
+2026-11-18 17:06:56  Temizlendi. Onbellek: 14501 MB -> 88 MB
+2026-11-18 17:54:12  Esik asildi (14237 MB >= 12288 MB), temizleniyor.
+2026-11-18 17:54:12  Calistiriliyor: C:\Tools\RAMMap.exe -Em
+2026-11-18 17:54:13  RAMMap cikis kodu: 0
+2026-11-18 17:54:15  Calistiriliyor: C:\Tools\RAMMap.exe -Et
+2026-11-18 17:54:16  RAMMap cikis kodu: 0
+2026-11-18 17:54:21  Temizlendi. Onbellek: 14236 MB -> 117 MB
+2026-11-18 19:38:54  Esik asildi (12938 MB >= 12288 MB), temizleniyor.
+2026-11-18 19:38:55  Calistiriliyor: C:\Tools\RAMMap.exe -Em
+2026-11-18 19:38:55  RAMMap cikis kodu: 0
+2026-11-18 19:38:57  Calistiriliyor: C:\Tools\RAMMap.exe -Et
+2026-11-18 19:38:59  RAMMap cikis kodu: 0
+2026-11-18 19:39:03  Temizlendi. Onbellek: 12936 MB -> 276 MB
+2026-11-18 20:15:15  Esik asildi (16629 MB >= 12288 MB), temizleniyor.
+2026-11-18 20:15:16  Calistiriliyor: C:\Tools\RAMMap.exe -Em
+2026-11-18 20:15:16  RAMMap cikis kodu: 0
+2026-11-18 20:15:18  Calistiriliyor: C:\Tools\RAMMap.exe -Et
+2026-11-18 20:15:21  RAMMap cikis kodu: 0
+2026-11-18 20:15:25  Temizlendi. Onbellek: 16624 MB -> 7369 MB
+2026-11-18 20:58:40  Esik asildi (12549 MB >= 12288 MB), temizleniyor.
+2026-11-18 20:58:40  Calistiriliyor: C:\Tools\RAMMap.exe -Em
+2026-11-18 20:58:41  RAMMap cikis kodu: 0
+2026-11-18 20:58:43  Calistiriliyor: C:\Tools\RAMMap.exe -Et
+2026-11-18 20:58:44  RAMMap cikis kodu: 0
+2026-11-18 20:58:49  Temizlendi. Onbellek: 12546 MB -> 113 MB
+2026-11-18 21:28:59  Esik asildi (14048 MB >= 12288 MB), temizleniyor.
+2026-11-18 21:28:59  Calistiriliyor: C:\Tools\RAMMap.exe -Em
+2026-11-18 21:29:00  RAMMap cikis kodu: 0
+2026-11-18 21:29:02  Calistiriliyor: C:\Tools\RAMMap.exe -Et
+2026-11-18 21:29:04  RAMMap cikis kodu: 0
+2026-11-18 21:29:08  Temizlendi. Onbellek: 14048 MB -> 59 MB
+2026-11-18 23:10:46  Esik asildi (12357 MB >= 12288 MB), temizleniyor.
+2026-11-18 23:10:46  Calistiriliyor: C:\Tools\RAMMap.exe -Em
+2026-11-18 23:10:46  RAMMap cikis kodu: 0
+2026-11-18 23:10:48  Calistiriliyor: C:\Tools\RAMMap.exe -Et
+2026-11-18 23:10:50  RAMMap cikis kodu: 0
+2026-11-18 23:10:54  Temizlendi. Onbellek: 12347 MB -> 48 MB
+2026-11-19 12:49:28  Calistiriliyor: C:\Tools\RAMMap.exe -Em
+2026-11-19 12:49:28  RAMMap cikis kodu: 0
+2026-11-19 12:49:30  Calistiriliyor: C:\Tools\RAMMap.exe -Et
+2026-11-19 12:49:31  RAMMap cikis kodu: 0
+2026-11-19 12:49:35  Temizlendi. Onbellek: 4050 MB -> 282 MB
+2026-11-19 12:49:35  Izleme basladi. Esik: 12288 MB, kontrol: 60 sn
+2026-11-19 13:19:49  Esik asildi (13748 MB >= 12288 MB), temizleniyor.
+2026-11-19 13:19:49  Calistiriliyor: C:\Tools\RAMMap.exe -Em
+2026-11-19 13:19:50  RAMMap cikis kodu: 0
+2026-11-19 13:19:52  Calistiriliyor: C:\Tools\RAMMap.exe -Et
+2026-11-19 13:19:54  RAMMap cikis kodu: 0
+2026-11-19 13:19:58  Temizlendi. Onbellek: 13738 MB -> 52 MB
+2026-11-19 17:03:17  Esik asildi (12740 MB >= 12288 MB), temizleniyor.
+2026-11-19 17:03:17  Calistiriliyor: C:\Tools\RAMMap.exe -Em
+2026-11-19 17:03:18  RAMMap cikis kodu: 0
+2026-11-19 17:03:20  Calistiriliyor: C:\Tools\RAMMap.exe -Et
+2026-11-19 17:03:22  RAMMap cikis kodu: 0
+2026-11-19 17:03:26  Temizlendi. Onbellek: 12734 MB -> 102 MB
+2026-11-20 00:25:23  Calistiriliyor: C:\Tools\RAMMap.exe -Em
+2026-11-20 00:25:24  RAMMap cikis kodu: 0
+2026-11-20 00:25:26  Calistiriliyor: C:\Tools\RAMMap.exe -Et
+2026-11-20 00:25:26  RAMMap cikis kodu: 0
+2026-11-20 00:25:31  Temizlendi. Onbellek: 4794 MB -> 195 MB
+2026-11-20 00:25:31  Izleme basladi. Esik: 12288 MB, kontrol: 60 sn
+2026-11-20 00:55:40  Esik asildi (12837 MB >= 12288 MB), temizleniyor.
+2026-11-20 00:55:40  Calistiriliyor: C:\Tools\RAMMap.exe -Em
+2026-11-20 00:55:41  RAMMap cikis kodu: 0
+2026-11-20 00:55:43  Calistiriliyor: C:\Tools\RAMMap.exe -Et
+2026-11-20 00:55:45  RAMMap cikis kodu: 0
+2026-11-20 00:55:49  Temizlendi. Onbellek: 12832 MB -> 103 MB
+2026-11-20 11:55:51  Calistiriliyor: C:\Tools\RAMMap.exe -Em
+2026-11-20 11:55:51  RAMMap cikis kodu: 0
+2026-11-20 11:55:53  Calistiriliyor: C:\Tools\RAMMap.exe -Et
+2026-11-20 11:55:54  RAMMap cikis kodu: 0
+2026-11-20 11:55:58  Temizlendi. Onbellek: 3616 MB -> 53 MB
+2026-11-20 11:55:58  Izleme basladi. Esik: 12288 MB, kontrol: 60 sn
+2026-11-20 14:17:52  Esik asildi (12508 MB >= 12288 MB), temizleniyor.
+2026-11-20 14:17:52  Calistiriliyor: C:\Tools\RAMMap.exe -Em
+2026-11-20 14:17:53  RAMMap cikis kodu: 0
+2026-11-20 14:17:55  Calistiriliyor: C:\Tools\RAMMap.exe -Et
+2026-11-20 14:17:56  RAMMap cikis kodu: 0
+2026-11-20 14:18:01  Temizlendi. Onbellek: 12504 MB -> 51 MB
+2026-11-20 14:48:10  Esik asildi (16618 MB >= 12288 MB), temizleniyor.
+2026-11-20 14:48:11  Calistiriliyor: C:\Tools\RAMMap.exe -Em
+2026-11-20 14:48:11  RAMMap cikis kodu: 0
+2026-11-20 14:48:13  Calistiriliyor: C:\Tools\RAMMap.exe -Et
+2026-11-20 14:48:15  RAMMap cikis kodu: 0
+2026-11-20 14:48:19  Temizlendi. Onbellek: 16616 MB -> 50 MB
+2026-11-20 16:08:45  Esik asildi (12532 MB >= 12288 MB), temizleniyor.
+2026-11-20 16:08:45  Calistiriliyor: C:\Tools\RAMMap.exe -Em
+2026-11-20 16:08:45  RAMMap cikis kodu: 0
+2026-11-20 16:08:48  Calistiriliyor: C:\Tools\RAMMap.exe -Et
+2026-11-20 16:08:49  RAMMap cikis kodu: 0
+2026-11-20 16:08:53  Temizlendi. Onbellek: 12530 MB -> 16 MB
+2026-11-20 17:52:29  Esik asildi (12421 MB >= 12288 MB), temizleniyor.
+2026-11-20 17:52:29  Calistiriliyor: C:\Tools\RAMMap.exe -Em
+2026-11-20 17:52:30  RAMMap cikis kodu: 0
+2026-11-20 17:52:32  Calistiriliyor: C:\Tools\RAMMap.exe -Et
+2026-11-20 17:52:34  RAMMap cikis kodu: 0
+2026-11-20 17:52:38  Temizlendi. Onbellek: 12417 MB -> 34 MB
+2026-11-20 20:44:33  Esik asildi (14114 MB >= 12288 MB), temizleniyor.
+2026-11-20 20:44:34  Calistiriliyor: C:\Tools\RAMMap.exe -Em
+2026-11-20 20:44:34  RAMMap cikis kodu: 0
+2026-11-20 20:44:36  Calistiriliyor: C:\Tools\RAMMap.exe -Et
+2026-11-20 20:44:38  RAMMap cikis kodu: 0
+2026-11-20 20:44:43  Temizlendi. Onbellek: 14107 MB -> 22 MB
+2026-11-20 21:14:53  Esik asildi (13700 MB >= 12288 MB), temizleniyor.
+2026-11-20 21:14:53  Calistiriliyor: C:\Tools\RAMMap.exe -Em
+2026-11-20 21:14:54  RAMMap cikis kodu: 0
+2026-11-20 21:14:56  Calistiriliyor: C:\Tools\RAMMap.exe -Et
+2026-11-20 21:14:57  RAMMap cikis kodu: 0
+2026-11-20 21:15:01  Temizlendi. Onbellek: 13694 MB -> 79 MB
+2026-11-20 21:45:11  Esik asildi (13124 MB >= 12288 MB), temizleniyor.
+2026-11-20 21:45:12  Calistiriliyor: C:\Tools\RAMMap.exe -Em
+2026-11-20 21:45:12  RAMMap cikis kodu: 0
+2026-11-20 21:45:14  Calistiriliyor: C:\Tools\RAMMap.exe -Et
+2026-11-20 21:45:16  RAMMap cikis kodu: 0
+2026-11-20 21:45:21  Temizlendi. Onbellek: 13123 MB -> 160 MB
+2026-11-20 22:37:38  Esik asildi (14048 MB >= 12288 MB), temizleniyor.
+2026-11-20 22:37:38  Calistiriliyor: C:\Tools\RAMMap.exe -Em
+2026-11-20 22:37:39  RAMMap cikis kodu: 0
+2026-11-20 22:37:41  Calistiriliyor: C:\Tools\RAMMap.exe -Et
+2026-11-20 22:37:43  RAMMap cikis kodu: 0
+2026-11-20 22:37:47  Temizlendi. Onbellek: 14046 MB -> 30 MB
+2026-11-21 00:37:29  Esik asildi (12644 MB >= 12288 MB), temizleniyor.
+2026-11-21 00:37:29  Calistiriliyor: C:\Tools\RAMMap.exe -Em
+2026-11-21 00:37:30  RAMMap cikis kodu: 0
+2026-11-21 00:37:32  Calistiriliyor: C:\Tools\RAMMap.exe -Et
+2026-11-21 00:37:34  RAMMap cikis kodu: 0
+2026-11-21 00:37:38  Temizlendi. Onbellek: 12640 MB -> 183 MB
+2026-11-21 12:50:32  Calistiriliyor: C:\Tools\RAMMap.exe -Em
+2026-11-21 12:50:33  RAMMap cikis kodu: 0
+2026-11-21 12:50:35  Calistiriliyor: C:\Tools\RAMMap.exe -Et
+2026-11-21 12:50:36  RAMMap cikis kodu: 0
+2026-11-21 12:50:40  Temizlendi. Onbellek: 5033 MB -> 231 MB
+2026-11-21 12:50:40  Izleme basladi. Esik: 12288 MB, kontrol: 60 sn
+2026-11-21 13:20:49  Esik asildi (14670 MB >= 12288 MB), temizleniyor.
+2026-11-21 13:20:50  Calistiriliyor: C:\Tools\RAMMap.exe -Em
+2026-11-21 13:20:50  RAMMap cikis kodu: 0
+2026-11-21 13:20:52  Calistiriliyor: C:\Tools\RAMMap.exe -Et
+2026-11-21 13:20:54  RAMMap cikis kodu: 0
+2026-11-21 13:20:58  Temizlendi. Onbellek: 14649 MB -> 73 MB
+2026-11-21 13:51:08  Esik asildi (16205 MB >= 12288 MB), temizleniyor.
+2026-11-21 13:51:08  Calistiriliyor: C:\Tools\RAMMap.exe -Em
+2026-11-21 13:51:09  RAMMap cikis kodu: 0
+2026-11-21 13:51:11  Calistiriliyor: C:\Tools\RAMMap.exe -Et
+2026-11-21 13:51:13  RAMMap cikis kodu: 0
+2026-11-21 13:51:17  Temizlendi. Onbellek: 16204 MB -> 56 MB
+2026-11-21 14:21:27  Esik asildi (13491 MB >= 12288 MB), temizleniyor.
+2026-11-21 14:21:27  Calistiriliyor: C:\Tools\RAMMap.exe -Em
+2026-11-21 14:21:28  RAMMap cikis kodu: 0
+2026-11-21 14:21:30  Calistiriliyor: C:\Tools\RAMMap.exe -Et
+2026-11-21 14:21:31  RAMMap cikis kodu: 0
+2026-11-21 14:21:35  Temizlendi. Onbellek: 13480 MB -> 46 MB
+2026-11-21 15:21:55  Esik asildi (14648 MB >= 12288 MB), temizleniyor.
+2026-11-21 15:21:55  Calistiriliyor: C:\Tools\RAMMap.exe -Em
+2026-11-21 15:21:56  RAMMap cikis kodu: 0
+2026-11-21 15:21:58  Calistiriliyor: C:\Tools\RAMMap.exe -Et
+2026-11-21 15:21:59  RAMMap cikis kodu: 0
+2026-11-21 15:22:04  Temizlendi. Onbellek: 14644 MB -> 67 MB

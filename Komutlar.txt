@@ -1,0 +1,51 @@
+Komutlari betigin bulundugu klasorde calistirin:
+
+powershell -ExecutionPolicy Bypass -File .\RAMMapOtomatik.ps1 durum
+powershell -ExecutionPolicy Bypass -File .\RAMMapOtomatik.ps1 pano
+powershell -ExecutionPolicy Bypass -File .\RAMMapOtomatik.ps1 simdi
+powershell -ExecutionPolicy Bypass -File .\RAMMapOtomatik.ps1 kapat
+powershell -ExecutionPolicy Bypass -File .\RAMMapOtomatik.ps1 ac
+powershell -ExecutionPolicy Bypass -File .\RAMMapOtomatik.ps1 kur
+powershell -ExecutionPolicy Bypass -File .\RAMMapOtomatik.ps1 kaldir
+
+durum: Ayarlari, bellek miktarini ve son log kayitlarini gosterir.
+pano: Durumu 2 saniyede bir yeniler. Ctrl+C ile kapanir. Yalnizca izler;
+      temizlik baslatmaz, otomasyonun bekleme sayacini degistirmez.
+simdi: Bir kez temizlik yapar.
+kapat / ac: Otomatik temizligi kapatir / yeniden baslatir.
+kur / kaldir: Zamanlanmis gorevleri kurar / siler (yonetici izni gerekir).
+
+config.json ayarlari:
+- RamMapYolu bos ise betigin klasorundeki RAMMap64.exe / RAMMap.exe aranir.
+  "alt/RAMMap.exe" gibi goreli dosya veya klasor yollari betigin klasorune
+  gore cozulur. Mutlak yollar da desteklenir. Bulunamazsa betigin klasorune bakilir.
+- Parametreler: -Em -Et -Ew -Es -E0 anahtarlarindan olusmalidir.
+  Bos veya gecersiz liste hicbir temizlik baslatmadan reddedilir.
+  Geriye uyumluluk: tek basina -Es eski ayarlarda -Et olarak kaydedilir.
+- BildirimAktif: Varsayilan false. true yapilirsa basarili temizlikten sonra
+  Windows PowerShell kimligiyle Windows toast bildirimi gonderilir.
+  Windows PowerShell Baslat menusu kaydi ve kullanici bildirim izinleri gerekir.
+  Windows bildirimleri engellerse gorunmeyebilir; gonderim hatasi loglanir,
+  temizlik sonucu basarili kalir. Ek PowerShell modulu gerekmez.
+
+Log: 1 MB esigine ulasacak yazmadan once log.txt, log.txt.1 olarak dondurulur.
+Tek arsiv tutulur; sonraki rotasyon eski arsivin uzerine yazar.
+Mevcut 500 satir siniri da korunur: asildiginda son 300 satir tutulur.
+log.txt.lock dosyasi eszamanli yazma/rotasyon icin kullanilir; bos kalmasi normaldir.
+
+Kod guncellemesinin calisan izleme gorevine gecmesi icin kapat, ardindan ac
+komutlarini kullanin. Ayar degisiklikleri izleme dongusunde yeniden okunur.
+Klasoru tasirsaniz eski gorev yollarini yenilemek icin yeni konumda kur gerekir.
+
+Guvenlik: Parametre listesi dogrulamasi dosya izinlerinin yerini tutmaz.
+Yonetici yetkisiyle kullanilan betik, RAMMap exe ve config dosyalarina yalnizca
+ guvenilir kullanicilar yazabilmelidir; RamMapYolu hala calistirilacak dosyayi secer.
+
+Test (Pester 5):
+Import-Module Pester -RequiredVersion 5.9.1
+Invoke-Pester .\RAMMapOtomatik.Tests.ps1 -Output Detailed
+Testler RAMMap ve sistem islemlerini taklit eder; canli temizlik veya toast
+ gorunurlugunu dogrulamaz. Pester kendi gecici kayit defteri alani icin izin ister.
+
+Toast altyapisi kaynagi:
+https://learn.microsoft.com/en-us/windows/win32/shell/enable-desktop-toast-with-appusermodelid
