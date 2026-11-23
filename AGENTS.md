@@ -1,31 +1,22 @@
-# Repository Guidelines
+# RAMMapOtomatik — oturum kuralları
 
-## Project Structure & Module Organization
+Bu dosya `C:\Tools` projesinde yeni Codex oturumları için kısa başlangıç bağlamıdır. Ayrıntılı mimari, mevcut durum ve yol haritası için yalnızca ilgili olduğunda [PROJE_REHBERI.md](PROJE_REHBERI.md) dosyasını aç. Gerçek davranış için güncel kod ve yapılandırma esastır; tarihli durum notlarını yeniden doğrula.
 
-This repository is a small Windows utility. `RAMMapOtomatik.ps1` contains the automation, `RAMMap.exe` is its bundled RAMMap executable, and `config.json` stores runtime settings. `log.txt` and `son_sonuc.txt` are generated during use. `Komutlar.txt` records the supported commands. There is no separate source, test, or asset directory; keep related files together because the script resolves paths relative to its own directory.
+## İşe başlamadan önce
 
-## Build, Test, and Development Commands
+- Kullanıcının isteğini ve değişen dosyaları belirle. İlgili kodu hedefli `rg` aramasıyla oku; tüm betiği veya günlükleri her oturumda baştan sona dökme.
+- `config.json` kullanıcı ayarıdır; `log.txt`, `son_sonuc.txt`, kilit dosyaları, SQLite verisi ve HTML raporlar çalışma verisidir. İstenmedikçe bunları değiştirme veya paylaşma.
+- `durum` dahil bazı komutlar ayar/durum dosyası oluşturabilir. Yalnızca inceleme gerekiyorsa önce dosya ve kod oku. `simdi`, `kur`, `ac`, `kapat`, `kaldir` komutlarını yalnızca görev gerektiriyorsa çalıştır; sistem ve zamanlanmış görev etkisini değerlendir.
+- `AnalizRaporu.md` 20.11.2026 tarihli bir anlık görüntüdür; eski önerileri güncel eksik sanma.
 
-There is no build step or package manager. Run commands from the repository folder:
+## Uygulama ve doğrulama
 
-- `powershell -ExecutionPolicy Bypass -File .\RAMMapOtomatik.ps1 durum` displays settings, cache size, and recent log entries.
-- `powershell -ExecutionPolicy Bypass -File .\RAMMapOtomatik.ps1 simdi` performs a one-time cleanup (requires the utility to be configured).
-- `powershell -ExecutionPolicy Bypass -File .\RAMMapOtomatik.ps1 kur` installs and starts scheduled tasks; use `ac`, `kapat`, or `kaldir` to manage them.
+- PowerShell, dört boşluk girinti, mevcut Türkçe adlandırma ve uygun yerlerde `Verb-Noun` işlev biçimini kullan. Dosya yollarını betik dizinine göre çöz. Görev planlama, yeniden deneme, atomik ayar yazımı ve kilitleme açıklamalarını koru.
+- `Ayar-Yukle` varsayımları ile `config.json` anahtarlarını uyumlu tut; JSON geçerli ve UTF-8 olsun. Makineye özgü yolu kodun varsayılanına yerleştirme.
+- Davranış değişikliğinde ilgili Pester testlerini güncelle ve `Invoke-Pester .\RAMMapOtomatik.Tests.ps1 -Output Detailed` çalıştır. Sonra değişen PowerShell dosyalarını `[System.Management.Automation.Language.Parser]::ParseFile(...)` ile denetle. Canlı RAMMap temizliği ve zamanlanmış görev denemesi yalnızca gerçekten gerektiğinde yapılır; otomatik test ile canlı doğrulamayı ayrı bildir.
+- Değişiklikten sonra ilgili ise `Komutlar.txt`, bu dosya ve `PROJE_REHBERI.md` içindeki durum/yol haritasını güncelle. Yalnızca doğrulanmış işleri “tamamlandı” olarak işaretle; tarih ve kalan doğrulama ihtiyacını yaz.
+- Sonuçta değişen dosyaları, nedenini, kontrolleri ve kalan somut riski kısaca belirt. Git geçmişi doğrulanmadıkça commit geleneği varsayma; PR için kısa emir kipinde başlık, davranış ve test özeti kullan.
 
-For script-only checks, parse without running commands: `$null = [System.Management.Automation.Language.Parser]::ParseFile((Resolve-Path .\RAMMapOtomatik.ps1), [ref]$null, [ref]$null)`. The repository includes `RAMMapOtomatik.Tests.ps1`, a Pester 5 test suite.
+## Kapsam
 
-## Coding Style & Naming Conventions
-
-Use PowerShell, four-space indentation, and descriptive names consistent with the existing Turkish identifiers. Keep helper functions focused and use the established `Verb-Noun` pattern where practical. Preserve comments that explain task scheduling, retries, atomic config writes, or other operational safeguards. Keep configuration keys aligned with the defaults in `Ayar-Yukle`; use valid JSON and retain UTF-8 encoding.
-
-## Testing Guidelines
-
-Run the tests with `Invoke-Pester .\RAMMapOtomatik.Tests.ps1 -Output Detailed` (Pester 5 or later), then run the parser check above. The suite mocks system calls and uses a temporary directory; for behavior changes that need a live system check, inspect `log.txt` in a safe Windows environment. Avoid installing or deleting scheduled tasks without considering their effect.
-
-## Commit & Pull Request Guidelines
-
-Git history is unavailable in this checkout, so no repository-specific commit convention can be confirmed. Use short imperative commit subjects (for example, `Handle missing RAMMap path`). Pull requests should explain the behavior change, list commands or manual checks performed, and include relevant log output when it clarifies the result. Call out any changes to configuration defaults or scheduled-task behavior.
-
-## Configuration & Runtime Data
-
-Treat `config.json` as user-editable runtime configuration and logs/result files as generated data. Do not commit personal logs, temporary files, or machine-specific paths unless the change explicitly requires them. Keep `RamMapYolu` portable when possible, or document why a fixed path is required.
+Ana komutlar: `kur`, `kaldir`, `ac`, `kapat`, `durum`, `pano`, `simdi`, `yardim`, `rapor`. `calistir` ve `tek` iç görev yollarıdır. Komutların kaynağı betikteki `ValidateSet` ve `switch` bloklarıdır. Ayrı derleme veya paket yöneticisi yoktur.

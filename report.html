@@ -1,0 +1,45 @@
+﻿<!doctype html>
+<html lang="tr">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Son temizlik | RAMMap</title>
+<style>
+    * { box-sizing: border-box; }
+    body { color: #102733; background: #ecf3f4; font: 1rem/1.55 system-ui, sans-serif; margin: 0; }
+    main { width: min(100% - 2rem, 52rem); margin: clamp(1rem, 6vw, 4rem) auto; }
+    header, section { padding: clamp(1.25rem, 4vw, 2.25rem); border-radius: 1rem; margin-bottom: 1rem; }
+    header { color: #fff; background: #123a46; }
+    section { background: #fff; border: 1px solid #ccdbe0; }
+    h1, h2, p { margin: 0 0 .6rem; }
+    h1 { font-size: clamp(1.6rem, 5vw, 2.5rem); line-height: 1.15; }
+    .summary { font-size: 1.6rem; font-weight: 700; color: #005f58; }
+    .row { display: grid; grid-template-columns: 5rem minmax(0, 1fr) 6rem; align-items: center; gap: .6rem; margin: .6rem 0; }
+    .row strong { text-align: end; font-variant-numeric: tabular-nums; }
+    meter { display: block; width: 100%; height: 1.1rem; }
+    meter::-webkit-meter-bar { background: #e5edf0; border: 0; border-radius: 1rem; }
+    meter::-webkit-meter-optimum-value { background: #087e76; border-radius: 1rem; }
+    meter::-moz-meter-bar { background: #087e76; border-radius: 1rem; }
+    small { color: #47616b; }
+    code { overflow-wrap: anywhere; }
+</style>
+<main>
+<header><h1>Son temizlik</h1><p>RAMMap &middot; 23.11.2026 14:16:57</p></header>
+<section>
+    <h2>&Ouml;nbellek &ouml;l&ccedil;&uuml;m&uuml;</h2>
+    <p class="summary">12318 MB azalma</p>
+    <div class='row'><span>&Ouml;nce</span><meter aria-label='&Ouml;nce' value='12357' max='12357'></meter><strong>12357 MB</strong></div>
+    <div class='row'><span>Sonra</span><meter aria-label='Sonra' value='39' max='12357'></meter><strong>39 MB</strong></div>
+    <p><small>Standby ve Modified listelerinin toplam&#305; &ouml;l&ccedil;&uuml;ld&uuml;.</small></p>
+    <p>RAMMap se&ccedil;enekleri <code>-Em -Et</code></p>
+</section>
+<section>
+    <h2>Standby &middot; Modified</h2>
+    <p>&Ouml;nce</p>
+    <div class='row'><span>Standby</span><meter aria-label='Standby' value='12103' max='12357'></meter><strong>12103 MB</strong></div>
+    <div class='row'><span>Modified</span><meter aria-label='Modified' value='255' max='12357'></meter><strong>255 MB</strong></div>
+    <p>Sonra</p>
+    <div class='row'><span>Standby</span><meter aria-label='Standby' value='37' max='12357'></meter><strong>37 MB</strong></div>
+    <div class='row'><span>Modified</span><meter aria-label='Modified' value='2' max='12357'></meter><strong>2 MB</strong></div>
+</section>
+</main>
+</html>

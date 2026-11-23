@@ -3,7 +3,7 @@ $TelemetriYolu = Join-Path $KlasorYolu 'telemetri.sqlite'
 $RaporYolu = Join-Path $KlasorYolu 'report.html'
 $HaftalikRaporYolu = Join-Path $KlasorYolu 'haftalik-rapor.html'
 
-function Sqlite-Calistir([string]$sql) {
+function Invoke-SqliteCalistir([string]$sql) {
     if (-not ('RAMMap.Sqlite' -as [type])) {
         Add-Type -TypeDefinition @'
 using System;
@@ -60,14 +60,14 @@ namespace RAMMap {
     return ,([RAMMap.Sqlite]::Execute($TelemetriYolu, $sql))
 }
 
-function Telemetri-Kaydet($olcum, $hiz) {
+function Save-Telemetri($olcum, $hiz) {
     $kultur = [Globalization.CultureInfo]::InvariantCulture
     $zaman = ([datetimeoffset]$olcum.Zaman).ToUnixTimeSeconds()
     $onbellek = $olcum.OnbellekMB.ToString('0', $kultur)
     $kullanim = $olcum.KullanimYuzde.ToString('0.00', $kultur)
     $cpu = $olcum.CpuYuzde.ToString('0.00', $kultur)
     $hizSql = if ($null -eq $hiz) { 'NULL' } else { $hiz.ToString('0.0000', $kultur) }
-    [void](Sqlite-Calistir @"
+    [void](Invoke-SqliteCalistir @"
 CREATE TABLE IF NOT EXISTS olcum (
     zaman INTEGER PRIMARY KEY, onbellek_mb INTEGER NOT NULL,
     kullanim_yuzde REAL NOT NULL, cpu_yuzde REAL NOT NULL, hiz_mb_sn REAL
@@ -79,7 +79,7 @@ COMMIT;
 "@)
 }
 
-function Rapor-Belgesi([string]$baslik, [string]$govde) {
+function Get-RaporBelgesi([string]$baslik, [string]$govde) {
     return @"
 <!doctype html>
 <html lang="tr">
@@ -113,14 +113,14 @@ $govde
 "@
 }
 
-function Rapor-Cubugu([string]$etiket, [double]$deger, [double]$tavan, [string]$birim) {
+function Get-RaporCubugu([string]$etiket, [double]$deger, [double]$tavan, [string]$birim) {
     $kultur = [Globalization.CultureInfo]::InvariantCulture
     $sayi = $deger.ToString('0.##', $kultur)
     $olcek = $tavan.ToString('0.##', $kultur)
     return "<div class='row'><span>$etiket</span><meter aria-label='$etiket' value='$sayi' max='$olcek'></meter><strong>$deger $birim</strong></div>"
 }
 
-function Temizlik-Raporu-Yaz($once, $sonra, $argumanlar) {
+function Write-TemizlikRaporu($once, $sonra, $argumanlar) {
     $tavan = [math]::Max(1, [math]::Max($once.OnbellekMB, $sonra.OnbellekMB))
     $fark = $once.OnbellekMB - $sonra.OnbellekMB
     $ozet = if ($fark -ge 0) { "$fark MB azalma" } else { "$(-$fark) MB art&#305;&#351;" }
@@ -128,25 +128,25 @@ function Temizlik-Raporu-Yaz($once, $sonra, $argumanlar) {
 <section>
     <h2>&Ouml;nbellek &ouml;l&ccedil;&uuml;m&uuml;</h2>
     <p class="summary">$ozet</p>
-    $(Rapor-Cubugu '&Ouml;nce' $once.OnbellekMB $tavan 'MB')
-    $(Rapor-Cubugu 'Sonra' $sonra.OnbellekMB $tavan 'MB')
+    $(Get-RaporCubugu '&Ouml;nce' $once.OnbellekMB $tavan 'MB')
+    $(Get-RaporCubugu 'Sonra' $sonra.OnbellekMB $tavan 'MB')
     <p><small>Standby ve Modified listelerinin toplam&#305; &ouml;l&ccedil;&uuml;ld&uuml;.</small></p>
     <p>RAMMap se&ccedil;enekleri <code>$($argumanlar -join ' ')</code></p>
 </section>
 <section>
     <h2>Standby &middot; Modified</h2>
     <p>&Ouml;nce</p>
-    $(Rapor-Cubugu 'Standby' $once.StandbyMB $tavan 'MB')
-    $(Rapor-Cubugu 'Modified' $once.ModifiedMB $tavan 'MB')
+    $(Get-RaporCubugu 'Standby' $once.StandbyMB $tavan 'MB')
+    $(Get-RaporCubugu 'Modified' $once.ModifiedMB $tavan 'MB')
     <p>Sonra</p>
-    $(Rapor-Cubugu 'Standby' $sonra.StandbyMB $tavan 'MB')
-    $(Rapor-Cubugu 'Modified' $sonra.ModifiedMB $tavan 'MB')
+    $(Get-RaporCubugu 'Standby' $sonra.StandbyMB $tavan 'MB')
+    $(Get-RaporCubugu 'Modified' $sonra.ModifiedMB $tavan 'MB')
 </section>
 "@
-    Dosya-Atomik-Yaz $RaporYolu (Rapor-Belgesi 'Son temizlik' $govde)
+    Dosya-Atomik-Yaz $RaporYolu (Get-RaporBelgesi 'Son temizlik' $govde)
 }
 
-function Haftalik-Rapor-Yaz {
+function Write-HaftalikRapor {
     if (-not (Test-Path -LiteralPath $TelemetriYolu -PathType Leaf)) {
         throw 'Henuz SQLite olcumu yok. TelemetriAktif ayarini true yapip izlemeyi baslatin.'
     }
@@ -159,7 +159,7 @@ function Haftalik-Rapor-Yaz {
         $son = [math]::Min($simdi.ToUnixTimeSeconds() + 1, ([datetimeoffset]$gun.AddDays(1)).ToUnixTimeSeconds())
         "('$($gun.ToString('dd.MM', [Globalization.CultureInfo]::InvariantCulture))', $ilk, $son)"
     }
-    $satirlar = Sqlite-Calistir @"
+    $satirlar = Invoke-SqliteCalistir @"
 WITH gunler(gun, ilk, son) AS (VALUES $($araliklar -join ', '))
 SELECT gun, round(avg(kullanim_yuzde), 1), max(kullanim_yuzde), count(*)
 FROM gunler JOIN olcum ON zaman >= ilk AND zaman < son
@@ -168,9 +168,9 @@ GROUP BY ilk, gun ORDER BY ilk;
     $cubuklar = foreach ($satir in $satirlar) {
         $ortalama = [double]::Parse($satir[1], [Globalization.CultureInfo]::InvariantCulture)
         $enYuksek = [double]::Parse($satir[2], [Globalization.CultureInfo]::InvariantCulture)
-        "$(Rapor-Cubugu $satir[0] $ortalama 100 '%')<small>En y&uuml;ksek %$enYuksek &middot; $($satir[3]) &ouml;l&ccedil;&uuml;m</small>"
+        "$(Get-RaporCubugu $satir[0] $ortalama 100 '%')<small>En y&uuml;ksek %$enYuksek &middot; $($satir[3]) &ouml;l&ccedil;&uuml;m</small>"
     }
     if (-not $cubuklar) { $cubuklar = 'Son 7 g&uuml;n i&ccedil;in &ouml;l&ccedil;&uuml;m yok.' }
     $govde = "<section><h2>G&uuml;nl&uuml;k ortalama fiziksel bellek kullan&#305;m&#305;</h2>$($cubuklar -join [Environment]::NewLine)</section>"
-    Dosya-Atomik-Yaz $HaftalikRaporYolu (Rapor-Belgesi 'Son 7 g&uuml;n' $govde)
+    Dosya-Atomik-Yaz $HaftalikRaporYolu (Get-RaporBelgesi 'Son 7 g&uuml;n' $govde)
 }

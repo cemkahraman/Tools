@@ -449,15 +449,14 @@ function Temizle($cfg, [switch]$Otomatik) {
         if (-not (Test-Path $reg)) { New-Item -Path $reg -Force | Out-Null }
         Set-ItemProperty -Path $reg -Name 'EulaAccepted' -Value 1 -Type DWord
 
+        # Her komutun tamamlanmasini RamMap-Calistir bekler.
         foreach ($arg in $argumanlar) {
             RamMap-Calistir $exe $arg
-            Start-Sleep -Seconds 2
         }
-        Start-Sleep -Seconds 2
         $sonra = Bellek-Olc
         Log "Temizlendi. Onbellek: $($once.OnbellekMB) MB -> $($sonra.OnbellekMB) MB"
         if ($cfg.HtmlRaporAktif -eq $true) {
-            try { Temizlik-Raporu-Yaz $once $sonra $argumanlar }
+            try { Write-TemizlikRaporu $once $sonra $argumanlar }
             catch { Log "UYARI: HTML raporu yazilamadi: $($_.Exception.Message)" }
         }
         if ($cfg.BildirimAktif -eq $true) {
@@ -534,7 +533,7 @@ switch ($Komut) {
     'yardim' { Yardim-Goster }
 
     'rapor' {
-        Haftalik-Rapor-Yaz
+        Write-HaftalikRapor
         Write-Host "Haftalik rapor hazir: $HaftalikRaporYolu" -ForegroundColor Green
     }
 
@@ -596,7 +595,7 @@ switch ($Komut) {
                 $hiz = Bellek-Hizi $oncekiOlcum $olcum (2 * $aralik)
                 $oncekiOlcum = $olcum
                 if ($telemetri) {
-                    try { Telemetri-Kaydet $olcum $hiz }
+                    try { Save-Telemetri $olcum $hiz }
                     catch { Log "UYARI: Telemetri yazilamadi: $($_.Exception.Message)" }
                 }
                 $bekleme = ((Get-Date) - $sonTemizlik).TotalMinutes
@@ -625,14 +624,15 @@ switch ($Komut) {
         try {
             $cfg = Ayar-Yukle
             $r = Temizle $cfg
-            "Temizlendi. Onbellek: $($r[0]) MB -> $($r[1]) MB" | Set-Content -Path $SonucYolu
+            $sonuc = "Temizlendi. Onbellek: $($r[0]) MB -> $($r[1]) MB"
         } catch [OperationCanceledException] {
-            Log $_.Exception.Message
-            $_.Exception.Message | Set-Content -Path $SonucYolu
+            $sonuc = $_.Exception.Message
+            Log $sonuc
         } catch {
-            Log "HATA: $($_.Exception.Message)"
-            "HATA: $($_.Exception.Message)" | Set-Content -Path $SonucYolu
+            $sonuc = "HATA: $($_.Exception.Message)"
+            Log $sonuc
         }
+        Dosya-Atomik-Yaz $SonucYolu $sonuc
     }
 
     'kur' {
@@ -703,9 +703,8 @@ switch ($Komut) {
             }
             Write-Host 'Temizleniyor...'
             $bitis = (Get-Date).AddSeconds(300)
-            while (-not (Test-Path $SonucYolu) -and (Get-Date) -lt $bitis) { Start-Sleep -Milliseconds 500 }
+            while (-not (Test-Path $SonucYolu) -and (Get-Date) -lt $bitis) { Start-Sleep -Milliseconds 200 }
             if (Test-Path $SonucYolu) {
-                Start-Sleep -Milliseconds 300
                 $sonuc = Get-Content -LiteralPath $SonucYolu -Raw
                 if ($sonuc -like 'Temizlendi.*') {
                     Write-Host "BAŞARILI | $($sonuc.TrimEnd())" -ForegroundColor Green

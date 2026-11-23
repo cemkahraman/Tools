@@ -264,6 +264,7 @@ Describe 'Temizle' {
         Should -Invoke Start-Process -Times 2 -Exactly
         Should -Invoke Start-Process -Times 1 -Exactly -ParameterFilter { $ArgumentList -contains '-Em' -and $ArgumentList.Count -eq 1 }
         Should -Invoke Start-Process -Times 1 -Exactly -ParameterFilter { $ArgumentList -contains '-Et' -and $ArgumentList.Count -eq 1 }
+        Should -Invoke Start-Sleep -Times 0 -Exactly
     }
 
     It 'tek anahtar verilirse tek kez calistirir' {
@@ -487,23 +488,23 @@ Describe 'Baslangic-Temizligi' {
 Describe 'SQLite telemetrisi' {
     It 'olcumleri kaydeder ve son yedi gunun HTML raporunu uretebilir' -Skip:(-not (Test-Path "$env:SystemRoot\System32\winsqlite3.dll")) {
         $zaman = [datetime]::UtcNow
-        Telemetri-Kaydet @{
+        Save-Telemetri @{
             Zaman = $zaman.AddDays(-9)
             OnbellekMB = 1000.0
             KullanimYuzde = 12.0
             CpuYuzde = 30.0
         } $null
-        Telemetri-Kaydet @{
+        Save-Telemetri @{
             Zaman = $zaman
             OnbellekMB = 1200.0
             KullanimYuzde = 56.5
             CpuYuzde = 42.0
         } 1.25
-        $olcumler = Sqlite-Calistir 'SELECT onbellek_mb, hiz_mb_sn FROM olcum;'
+        $olcumler = Invoke-SqliteCalistir 'SELECT onbellek_mb, hiz_mb_sn FROM olcum;'
         $olcumler.Count | Should -Be 1
         $olcumler[0][0] | Should -Be '1200'
         $olcumler[0][1] | Should -Be '1.25'
-        Haftalik-Rapor-Yaz
+        Write-HaftalikRapor
         Get-Content -LiteralPath $HaftalikRaporYolu -Raw | Should -Match "value='56.5'"
     }
 }
